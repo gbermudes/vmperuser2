@@ -18,12 +18,23 @@ public class Item {
 	@Column(name="num_item")
 	private int numItem;
 	
-    @ManyToOne
+	@ManyToOne
+	private Maquina maquina;
+
+	@ManyToOne
 	private Software software;
 	
 	@ManyToOne
 	private Solicitacao solicitacao;
 
+	public Maquina getMaquina() {
+		return maquina;
+	}
+
+	public void setMaquina(Maquina maquina) {
+		this.maquina = maquina;
+	}
+	
 	public int getNumItem() {
 		return numItem;
 	}
@@ -47,8 +58,4 @@ public class Item {
 	public void setSolicitacao(Solicitacao solicitacao) {
 		this.solicitacao = solicitacao;
 	}
-	
-	
-
-	
 }
