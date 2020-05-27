@@ -12,9 +12,10 @@ import javax.persistence.Table;
 @Table(name = "tbl_maquina") 
 public class Maquina {
 	
-	@Column(name = "id")                                 // especifico o nome da coluna
-	@Id                                                  // digo que eh chave primaria
-	@GeneratedValue(strategy = GenerationType.IDENTITY)  // eh um valor gerado pelo banco
+	                                 
+	@Id                                               
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int    id;
 	
 	@Column(name = "qntd_cpu")
@@ -30,7 +31,7 @@ public class Maquina {
 	private int		qntd_banda;
 	
 	@Column(name = "valorTotal")
-	private int		valorTotal;
+	private float	valorTotal;
 	
 	/*@Column(name = "valorHora_cpu")
 	private float	valorHora_cpu;
@@ -84,11 +85,11 @@ public class Maquina {
 		this.qntd_banda = qntd_banda;
 	}
 
-	public int getValorTotal() {
+	public float getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(int valorTotal) {
+	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 }

@@ -27,6 +27,7 @@ public class SolicitacaoController {
 			for (Item it : nova.getItensSolicitacao()) {
 				it.setSolicitacao(nova);
 			}
+			System.out.println(nova.getData());
 			sdao.save(nova);
 			return ResponseEntity.ok(nova);
 		}

@@ -30,7 +30,7 @@ public class Solicitacao {
 	
 	@Column(name="data")
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy", timezone = "America/Sao_Paulo")
 	private Date   data;
 	
 	@Column(name="observacoes", length=200)
@@ -40,7 +40,15 @@ public class Solicitacao {
 	@JsonIgnoreProperties("pedidos")
 	private Usuario solicitante;    // aqui é a relação da chave estrangeira com Usuario
 	
+	@Column(name = "valor") //valor da soma de maquina + softwares
+	private double valor;
 	
+	public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
 	// relaciono a solicitacao com  seu conjunto de itens
 	@OneToMany(mappedBy = "solicitacao", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("solicitacao")

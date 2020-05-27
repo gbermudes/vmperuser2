@@ -17,7 +17,7 @@ import com.doti2c.vmperuser.app.model.Maquina;
  * Valor 1x CPU por hora R$10
  * Valor 1x GBMemoria por hora R$5
  * Valor 1x 1GBDisco por hora R$1
- * Valor 1x MB por hora R1
+ * Valor 1x MB por hora R$1
  */
 
 @RestController
@@ -30,9 +30,10 @@ public class MaquinaController {
 	@PostMapping("/maquina/nova")
 	public ResponseEntity<Maquina> adicionarMaquina(@RequestBody Maquina nova){
 		try {
-			int i;
+			float i;
 			i = (nova.getQntd_cpu() * 10) + (nova.getQntd_memoria() * 5) + nova.getQntd_disco() + nova.getQntd_banda();
 			nova.setValorTotal(i);
+			mdao.save(nova);
 			return ResponseEntity.ok(nova);
 		}
 		catch (Exception ex) {
