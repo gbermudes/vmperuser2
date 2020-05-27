@@ -1,17 +1,17 @@
 package com.doti2c.vmperuser.app.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.doti2c.vmperuser.app.dao.MaquinaDAO;
 import com.doti2c.vmperuser.app.model.Maquina;
+
 
 /*
  * Valor 1x CPU por hora R$10
@@ -33,7 +33,7 @@ public class MaquinaController {
 			float i;
 			i = (nova.getQntd_cpu() * 10) + (nova.getQntd_memoria() * 5) + nova.getQntd_disco() + nova.getQntd_banda();
 			nova.setValorTotal(i);
-			mdao.save(nova);
+		    mdao.save(nova);
 			return ResponseEntity.ok(nova);
 		}
 		catch (Exception ex) {
@@ -42,11 +42,22 @@ public class MaquinaController {
 		
 	}
 	
-	
+	/*
 	@GetMapping("/maquinas")
 	public ResponseEntity<ArrayList<Maquina>> buscarTodos() {
 		ArrayList<Maquina> lista = (ArrayList<Maquina>) mdao.findAll();
 		return ResponseEntity.ok(lista);
+	}*/
+	@GetMapping("/maquina/{id}")
+	public ResponseEntity<Maquina> buscarPeloId(@PathVariable int id){
+		Maquina maquin = mdao.findById(id).orElse(null);
+		if (maquin != null) {
+			return ResponseEntity.ok(maquin);
+		}
+		else {
+			return ResponseEntity.notFound().build();
+		}
 	}
+	
 	
 }
